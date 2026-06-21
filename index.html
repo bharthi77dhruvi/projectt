@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Father's Day Papa</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    overflow:hidden;
+    background: linear-gradient(to bottom, #fff1e6, #ffd6ba, #ffb4a2);
+}
+
+/* PAGE 1 */
+
+.page1{
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+      position: relative;
+    z-index: 2;
+}
+
+.page1 h1{
+    font-size:55px;
+    color:#7b2d26;
+    margin-bottom:30px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px rgba(255,255,255,0.5);
+    }
+    to{
+        text-shadow:0 0 25px rgba(255,140,80,0.8);
+    }
+}
+
+.start-btn{
+    padding:16px 35px;
+    border:none;
+    border-radius:40px;
+    background:#7b2d26;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.start-btn:hover{
+    transform:scale(1.08);
+    background:#a23e34;
+}
+
+/* PAGE 2 */
+
+.page2{
+    width:100%;
+    height:100vh;
+    position:relative;
+    display:none;
+    overflow:hidden;
+      position: relative;
+    z-index: 2;
+}
+
+/* BALLOONS */
+
+.balloon{
+    width:85px;
+    height:110px;
+    border-radius:50%;
+    position:absolute;
+    bottom:-150px;
+    cursor:pointer;
+    animation: floatUp 18s linear infinite;
+    transition:0.3s;
+}
+
+.balloon::after{
+    content:'';
+    width:2px;
+    height:90px;
+    background:white;
+    position:absolute;
+    top:110px;
+    left:50%;
+}
+
+.balloon:hover{
+    transform:scale(1.05);
+}
+
+/* Warm Colors */
+
+.b1{
+    background:#ff6b6b;
+    left:10%;
+    animation-delay:0s;
+}
+
+.b2{
+    background:#f4a261;
+    left:30%;
+    animation-delay:3s;
+}
+
+.b3{
+    background:#e76f51;
+    left:50%;
+    animation-delay:6s;
+}
+
+.b4{
+    background:#ffb703;
+    left:70%;
+    animation-delay:2s;
+}
+
+.b5{
+    background:#d62828;
+    left:85%;
+    animation-delay:5s;
+}
+
+/* Floating */
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0);
+    }
+
+    100%{
+        transform:translateY(-130vh);
+    }
+}
+
+/* POP EFFECT */
+
+.pop{
+    animation: popAnim 0.4s forwards !important;
+}
+
+@keyframes popAnim{
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(2);
+        opacity:0;
+    }
+}
+
+/* MESSAGE BOX */
+
+.message-box{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    padding:25px;
+    border-radius:25px;
+    text-align:center;
+    display:none;
+    width:320px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.message-box img{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    border:5px solid white;
+    margin-bottom:20px;
+}
+
+.message-box p{
+    color:#5c1d18;
+    font-size:24px;
+    font-weight:bold;
+    line-height:1.4;
+}
+
+/* FALLING HEARTS & FLOWERS */
+
+.fall-container{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.fall-item{
+    position:absolute;
+    top:-20px;
+    font-size:20px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall{
+
+    0%{
+        transform:translateY(-20px) rotate(0deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+
+<div class="page1" id="page1">
+
+    <h1>
+        Happy Father's Day Papa ❤️ <br>
+        I Love You
+    </h1>
+
+    <button class="start-btn" onclick="openPage2()">
+        Open My Surprise
+    </button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page2" id="page2">
+
+    <!-- BALLOONS -->
+
+    <div class="balloon b1" onclick="popBalloon(this,0)"></div>
+    <div class="balloon b2" onclick="popBalloon(this,1)"></div>
+    <div class="balloon b3" onclick="popBalloon(this,2)"></div>
+    <div class="balloon b4" onclick="popBalloon(this,3)"></div>
+    <div class="balloon b5" onclick="popBalloon(this,4)"></div>
+
+    <!-- MESSAGE BOX -->
+
+    <div class="message-box" id="messageBox">
+
+        <img id="dadPhoto" src="" alt="Papa">
+
+        <p id="dadMessage"></p>
+
+    </div>
+
+</div>
+<!-- Falling Hearts & Flowers Animation -->
+<div class="fall-container"></div>
+
+<script>
+  const container = document.querySelector(".fall-container");
+  const items = ["💖","🌸","❤️","🌼","💙","🌺"];
+
+  function createItem(){
+    const el = document.createElement("div");
+    el.classList.add("fall-item");
+
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.animationDuration = (4 + Math.random() * 5) + "s";
+    el.style.fontSize = (15 + Math.random() * 20) + "px";
+
+    container.appendChild(el);
+
+    setTimeout(() => {
+      el.remove();
+    }, 9000);
+  }
+
+  setInterval(createItem, 300);
+</script>
+<script>
+
+/* OPEN PAGE 2 */
+
+function openPage2(){
+
+    document.getElementById("page1").style.display = "none";
+
+    document.getElementById("page2").style.display = "block";
+}
+
+/* YOUR PHOTOS */
+
+const photos = [
+    
+   
+    "pic/papa1.jpg",
+    "pic/foto.jpg",
+    "pic/papa2.jpg",
+    "pic/papa3.jpg",
+    "pic/papa4.jpg",
+
+  
+
+];
+
+/* SWEET MESSAGES */
+
+const messages = [
+
+    "Papa, your hard work inspires me every day ❤️",
+
+    "You are the strongest person in my life 💪",
+
+    "Your love and dedication mean everything to me ❤️",
+
+    "Thank you for always supporting our family 🌟",
+
+    "I am proud to be your child ❤️"
+
+];
+
+/* POP BALLOON */
+
+function popBalloon(balloon,index){
+
+    balloon.classList.add("pop");
+
+    setTimeout(() => {
+
+        document.getElementById("messageBox").style.display = "block";
+
+        document.getElementById("dadPhoto").src = photos[index];
+
+        document.getElementById("dadMessage").innerText = messages[index];
+
+    }, 400);
+}
+
+</script>
+
+</body>
+</html>
